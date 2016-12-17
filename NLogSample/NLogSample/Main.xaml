@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NLogSample.Main"
+             >
+
+  <StackLayout>
+    <Button x:Name="LoggingButton" Clicked="OnLoggingButton" Text="Logging test."></Button>
+    <Button x:Name="ExceptionButton" Clicked="OnExceptionButton" Text="Throws Error"></Button>
+  </StackLayout>
+</ContentPage>
