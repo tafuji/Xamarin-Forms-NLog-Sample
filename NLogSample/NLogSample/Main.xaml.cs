@@ -31,10 +31,10 @@ namespace NLogSample
 
         void OnLoggingButton(object sender, EventArgs e)
         {
-            Logger.Info("Information レベルのログ出力");
-            Logger.Warn("警告レベルのログ出力");
-            Logger.Debug("デバッグレベルのログ出力");
-            Logger.Trace("詳細レベルのログ出力");
+            Logger.Info("Logging with informatin level.");
+            Logger.Warn("Logging with warning level.");
+            Logger.Debug("Logging with debug level.");
+            Logger.Trace("Logging with verbose level.");
         }
 
         void OnExceptionButton(object sender, EventArgs e)
