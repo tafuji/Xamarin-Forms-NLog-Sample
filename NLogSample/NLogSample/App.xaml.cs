@@ -5,13 +5,16 @@ using System.Text;
 using Xamarin.Forms;
 using NLogSample;
 using NLogSample.Logging;
+using Xamarin.Forms.Xaml;
 
 namespace NLogSample
 {
-    public class App : Application
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class App : Application
     {
         public App()
         {
+            
             var content = new Main();
             content.Title = "NLogSample";
             MainPage = new NavigationPage(content);

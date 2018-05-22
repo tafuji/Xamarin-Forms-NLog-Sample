@@ -2,6 +2,7 @@
 using NLogSample.Logging;
 using Xamarin.Forms;
 using NLog;
+using NLog.Config;
 
 [assembly: Dependency(typeof(LoggingServiceImplementation))]
 namespace NLogSample.Logging
@@ -12,110 +13,130 @@ namespace NLogSample.Logging
     /// </summary>
     public class LoggingServiceImplementation : ILoggingService
     {
-        private ILogger logger = LogManager.GetCurrentClassLogger();
+        private ILogger _logger;
 
-        #region Error
+        private ILogger Logger
+        {
+            get
+            {
+                if(_logger == null)
+                {
+                    var configName = string.Empty;
+                    #if __ANDROID__
+                    configName = "assets/NLog.config";
+                    #endif
+                    #if __IOS__
+                    configName = "NLog.config";
+                    #endif
+                    LogManager.Configuration = new XmlLoggingConfiguration(configName);
+                    _logger = LogManager.GetCurrentClassLogger();
+                }
+                return _logger;
+            }
+        }
+
+#region Error
 
         public void Error(string message)
         {
-            logger.Error(message);
+            Logger.Error(message);
         }
 
         public void Error(Exception e, string message)
         {
-            logger.Error(e, message);
+            Logger.Error(e, message);
         }
 
         public void Error(string format, params object[] args)
         {
-            logger.Error(format, args);
+            Logger.Error(format, args);
         }
 
         public void Error(Exception e, string format, params object[] args)
         {
-            logger.Error(e, format, args);
+            Logger.Error(e, format, args);
         }
 
-        #endregion
+#endregion
 
-        #region Fatal
+#region Fatal
 
         public void Fatal(string message)
         {
-            logger.Fatal(message);
+            Logger.Fatal(message);
         }
 
         public void Fatal(string format, params object[] args)
         {
-            logger.Fatal(format, args);
+            Logger.Fatal(format, args);
         }
 
         public void Fatal(Exception e, string message)
         {
-            logger.Fatal(e, message);
+            Logger.Fatal(e, message);
         }
 
         public void Fatal(Exception e, string format, params object[] args)
         {
-            logger.Fatal(e, format, args);
+            Logger.Fatal(e, format, args);
         }
 
-        #endregion
+#endregion
 
-        #region Debug
+#region Debug
 
         public void Debug(string message)
         {
-            logger.Debug(message);
+            Logger.Debug(message);
         }
 
         public void Debug(string format, params object[] args)
         {
-            logger.Debug(format, args);
+            Logger.Debug(format, args);
         }
 
-        #endregion
+#endregion
 
-        #region Info
+#region Info
 
         public void Info(string message)
         {
-            logger.Info(message);
+            Logger.Info(message);
         }
 
         public void Info(string message, params object[] args)
         {
-            logger.Info(message, args);
+            Logger.Info(message, args);
         }
 
-        #endregion
+#endregion
 
-        #region Trace
+#region Trace
 
         public void Trace(string message)
         {
-            logger.Trace(message);
+            Logger.Trace(message);
         }
 
         public void Trace(string format, params object[] args)
         {
-            logger.Trace(format, args);
+            Logger.Trace(format, args);
         }
 
-        #endregion
+#endregion
 
-        #region Warn
+#region Warn
 
         public void Warn(string message)
         {
-            logger.Warn(message);
+            Logger.Warn(message);
         }
 
         public void Warn(string format, params object[] args)
         {
-            logger.Warn(format, args);
+            Logger.Warn(format, args);
         }
 
-        #endregion
+#endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using NLogSample.Logging;
+﻿using NLog;
+using NLogSample.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace NLogSample
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Main : ContentPage
     {
         private ILoggingService _logger;
