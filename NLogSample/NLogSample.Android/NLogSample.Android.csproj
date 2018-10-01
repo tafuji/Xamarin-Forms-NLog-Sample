@@ -67,7 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\NLog.config" />
     <AndroidAsset Include="Assets\NLog.xsd">
       <SubType>Designer</SubType>
     </AndroidAsset>

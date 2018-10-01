@@ -29,7 +29,7 @@ namespace NLogSample.Logging
                     configName = "NLog.config";
                     #endif
                     LogManager.Configuration = new XmlLoggingConfiguration(configName);
-                    _logger = LogManager.GetCurrentClassLogger();
+                    _logger = LogManager.GetLogger("NLogSample");
                 }
                 return _logger;
             }
