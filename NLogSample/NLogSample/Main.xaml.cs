@@ -1,4 +1,5 @@
-﻿using NLogSample.Logging;
+﻿using NLog;
+using Plugin.NLogSample.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace NLogSample
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Main : ContentPage
     {
         private ILoggingService _logger;
@@ -16,7 +19,7 @@ namespace NLogSample
         {
             get
             {
-                if (_logger == null) _logger = DependencyService.Get<ILoggingService>();
+                if (_logger == null) _logger = CrossLoggingService.Current;
                 return _logger;
             }
         }
@@ -28,10 +31,10 @@ namespace NLogSample
 
         void OnLoggingButton(object sender, EventArgs e)
         {
-            Logger.Info("Information レベルのログ出力");
-            Logger.Warn("警告レベルのログ出力");
-            Logger.Debug("デバッグレベルのログ出力");
-            Logger.Trace("詳細レベルのログ出力");
+            Logger.Info("Logging with informatin level.");
+            Logger.Warn("Logging with warning level.");
+            Logger.Debug("Logging with debug level.");
+            Logger.Trace("Logging with verbose level.");
         }
 
         void OnExceptionButton(object sender, EventArgs e)

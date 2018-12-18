@@ -21,11 +21,11 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>6.0</string>
+	<string>9.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>NLogSample</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.NLogSample</string>
+	<string>com.tafuji.NLogSample.iOS</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>
