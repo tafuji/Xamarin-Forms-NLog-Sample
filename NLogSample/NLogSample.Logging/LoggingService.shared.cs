@@ -1,33 +1,21 @@
-﻿using System;
-using NLogSample.Logging;
-using Xamarin.Forms;
-using NLog;
+﻿using NLog;
 using NLog.Config;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-[assembly: Dependency(typeof(LoggingServiceImplementation))]
-namespace NLogSample.Logging
+namespace Plugin.NLogSample.Logging
 {
-
-    /// <summary>
-    /// implements <see cref="ILoggingService"/>.
-    /// </summary>
-    public class LoggingServiceImplementation : ILoggingService
+    internal class LoggingService : ILoggingService
     {
         private ILogger _logger;
-
         private ILogger Logger
         {
             get
             {
-                if(_logger == null)
+                if (_logger == null)
                 {
-                    var configName = string.Empty;
-                    #if __ANDROID__
-                    configName = "assets/NLog.config";
-                    #endif
-                    #if __IOS__
-                    configName = "NLog.config";
-                    #endif
+                    var configName = PlatformLoggingService.ConfigFilePath;
                     LogManager.Configuration = new XmlLoggingConfiguration(configName);
                     _logger = LogManager.GetLogger("NLogSample");
                 }
@@ -35,7 +23,7 @@ namespace NLogSample.Logging
             }
         }
 
-#region Error
+        #region Error
 
         public void Error(string message)
         {
@@ -57,9 +45,9 @@ namespace NLogSample.Logging
             Logger.Error(e, format, args);
         }
 
-#endregion
+        #endregion
 
-#region Fatal
+        #region Fatal
 
         public void Fatal(string message)
         {
@@ -81,9 +69,9 @@ namespace NLogSample.Logging
             Logger.Fatal(e, format, args);
         }
 
-#endregion
+        #endregion
 
-#region Debug
+        #region Debug
 
         public void Debug(string message)
         {
@@ -95,9 +83,9 @@ namespace NLogSample.Logging
             Logger.Debug(format, args);
         }
 
-#endregion
+        #endregion
 
-#region Info
+        #region Info
 
         public void Info(string message)
         {
@@ -109,9 +97,9 @@ namespace NLogSample.Logging
             Logger.Info(message, args);
         }
 
-#endregion
+        #endregion
 
-#region Trace
+        #region Trace
 
         public void Trace(string message)
         {
@@ -123,9 +111,9 @@ namespace NLogSample.Logging
             Logger.Trace(format, args);
         }
 
-#endregion
+        #endregion
 
-#region Warn
+        #region Warn
 
         public void Warn(string message)
         {
@@ -137,6 +125,7 @@ namespace NLogSample.Logging
             Logger.Warn(format, args);
         }
 
-#endregion
+        #endregion
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using NLog;
-using NLogSample.Logging;
+using Plugin.NLogSample.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,7 @@ namespace NLogSample
         {
             get
             {
-                if (_logger == null) _logger = DependencyService.Get<ILoggingService>();
+                if (_logger == null) _logger = CrossLoggingService.Current;
                 return _logger;
             }
         }

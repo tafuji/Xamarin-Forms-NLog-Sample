@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
-using NLogSample;
-using NLogSample.Logging;
 using Xamarin.Forms.Xaml;
 
 namespace NLogSample

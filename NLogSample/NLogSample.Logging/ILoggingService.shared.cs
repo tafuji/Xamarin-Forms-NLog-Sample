@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NLogSample.Logging
+namespace Plugin.NLogSample.Logging
 {
-    /// <summary>
-    /// This interface provides logging interface.
-    /// </summary>
     public interface ILoggingService
     {
         void Info(string message);

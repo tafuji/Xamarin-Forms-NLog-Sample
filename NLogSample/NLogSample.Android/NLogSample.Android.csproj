@@ -16,7 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -49,17 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NLog">
-      <Version>4.5.4</Version>
+      <Version>4.5.11</Version>
     </PackageReference>
     <PackageReference Include="NLog.Config">
-      <Version>4.5.4</Version>
+      <Version>4.5.11</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
+    <PackageReference Include="NLog.Schema">
+      <Version>4.5.11</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>3.4.0.1008975</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -70,6 +70,7 @@
     <AndroidAsset Include="Assets\NLog.xsd">
       <SubType>Designer</SubType>
     </AndroidAsset>
+    <AndroidAsset Include="Assets\NLog.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -100,11 +101,14 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NLogSample.Logging\NLogSample.Logging.csproj">
+      <Project>{8ca8e1ef-d68b-491e-89f1-f681304f01cf}</Project>
+      <Name>NLogSample.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NLogSample\NLogSample.csproj">
       <Project>{349199b2-4bcd-449d-97b9-5f69679ee710}</Project>
       <Name>NLogSample</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\NLogSample.Shared\NLogSample.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
