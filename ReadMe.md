@@ -36,7 +36,7 @@ Then, you have to set the build action value of the property to ```AndroidAsset`
 
 ![AndroidProperty](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/03-Android-NLogConfig-Property.png)
 
-In Android platform, the ```fileName``` attribute should have the value, which shoule be "```/data/data/[your package name]/```" format.
+In Android platform, the ```fileName``` attribute should have the value, which should be "```/data/data/[your package name]/```" format.
 
 ```xml
 <target name="logfile"
