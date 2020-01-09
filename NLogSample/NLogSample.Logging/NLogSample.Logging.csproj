@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.61">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
 
   <PropertyGroup>
     <!--Work around so the conditions work below-->
@@ -41,7 +41,7 @@
     <Description>Plugin Description</Description>
     
     
-    <Owners>YOU</Owners>
+    <Owners>Takeshi Fujimoto</Owners>
     <Authors>Takeshi Fujimoto</Authors>
     <Copyright>Copyright 2018</Copyright>
   </PropertyGroup>
@@ -84,7 +84,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.5.11" />
+    <PackageReference Include="NLog" Version="4.6.8" />
   </ItemGroup>
 
   <!--Additional item groups-->

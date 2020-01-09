@@ -134,16 +134,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NLog">
-      <Version>4.5.11</Version>
+      <Version>4.6.8</Version>
     </PackageReference>
     <PackageReference Include="NLog.Config">
-      <Version>4.5.11</Version>
+      <Version>4.6.8</Version>
     </PackageReference>
     <PackageReference Include="NLog.Schema">
-      <Version>4.5.11</Version>
+      <Version>4.6.8</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.4.0.1008975</Version>
+      <Version>4.4.0.991265</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
