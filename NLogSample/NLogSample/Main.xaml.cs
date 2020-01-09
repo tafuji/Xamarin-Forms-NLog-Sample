@@ -24,9 +24,22 @@ namespace NLogSample
             }
         }
 
+        public  List<LogLevel> LogLevels = new List<LogLevel>()
+        {
+            LogLevel.Trace,
+            LogLevel.Debug,
+            LogLevel.Info,
+            LogLevel.Warn,
+            LogLevel.Error,
+            LogLevel.Fatal,
+            LogLevel.Off
+        };
+
         public Main()
         {
             InitializeComponent();
+            LogLevelPicker.ItemsSource = LogLevels;
+            LogLevelPicker.SelectedIndex = 0;
         }
 
         void OnLoggingButton(object sender, EventArgs e)
@@ -35,6 +48,8 @@ namespace NLogSample
             Logger.Warn("Logging with warning level.");
             Logger.Debug("Logging with debug level.");
             Logger.Trace("Logging with verbose level.");
+            Logger.Error("Logging with error level.");
+            Logger.Fatal("Logging with fatal level.");
         }
 
         void OnExceptionButton(object sender, EventArgs e)
@@ -50,5 +65,10 @@ namespace NLogSample
             }
         }
 
+        private void LogLevelPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedItem = LogLevelPicker.SelectedItem;
+            Logger.ChangeLogLevel((LogLevel)selectedItem);
+        }
     }
 }

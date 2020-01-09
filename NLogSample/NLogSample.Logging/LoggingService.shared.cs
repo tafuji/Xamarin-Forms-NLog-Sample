@@ -2,12 +2,29 @@
 using NLog.Config;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Plugin.NLogSample.Logging
 {
     internal class LoggingService : ILoggingService
     {
+
+        private LogFactory logFactory;
+        private LogFactory LogFactory
+        {
+            get
+            {
+                if(logFactory == null)
+                {
+                    var configName = PlatformLoggingService.ConfigFilePath;
+                    logFactory = new LogFactory(new XmlLoggingConfiguration(configName));
+
+                }
+                return logFactory;
+            }
+        }
+
         private ILogger _logger;
         private ILogger Logger
         {
@@ -15,9 +32,7 @@ namespace Plugin.NLogSample.Logging
             {
                 if (_logger == null)
                 {
-                    var configName = PlatformLoggingService.ConfigFilePath;
-                    LogManager.Configuration = new XmlLoggingConfiguration(configName);
-                    _logger = LogManager.GetLogger("NLogSample");
+                    _logger = logFactory.GetLogger("NLogSample");
                 }
                 return _logger;
             }
@@ -57,5 +72,31 @@ namespace Plugin.NLogSample.Logging
         public void Warn(string message) => Logger.Warn(message);
         public void Warn(string format, params object[] args) => Logger.Warn(format, args);
         #endregion
+
+        public void ChangeLogLevel(LogLevel level)
+        {
+            
+            if (level == LogLevel.Off)
+            {
+                LogFactory.SuspendLogging();
+            }
+            else
+            {
+                if (!LogFactory.IsLoggingEnabled())
+                {
+                    LogFactory.ResumeLogging();
+                }
+
+                int maxLogLevelOrdinal = LogLevel.AllLoggingLevels.Max(p => p.Ordinal);
+                int minLogLevelOrdinal = LogLevel.AllLoggingLevels.Min(p => p.Ordinal);
+
+                foreach (var rule in LogFactory.Configuration.LoggingRules)
+                {
+                    rule.DisableLoggingForLevels(LogLevel.FromOrdinal(minLogLevelOrdinal), level);
+                    rule.EnableLoggingForLevels(level, LogLevel.FromOrdinal(maxLogLevelOrdinal));
+                }
+            }
+            LogFactory.ReconfigExistingLoggers();
+        }
     }
 }

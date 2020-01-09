@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,5 +28,7 @@ namespace Plugin.NLogSample.Logging
 
         void Warn(string message);
         void Warn(string format, params object[] args);
+
+        void ChangeLogLevel(LogLevel level);
     }
 }
