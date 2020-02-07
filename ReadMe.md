@@ -4,12 +4,13 @@ This is a simple Xamarin.Forms sample code for logging with [NLog](https://nlog-
 
 ## Sample application
 
-This repository provides a very simple application, which has only two buttons. If you tap the buttons, sample applicaiton writes information to CSV format log file.
+This repository provides a very simple application, which has a picker and two buttons. If you tap the buttons, sample applicaiton writes information to CSV format log file according to the selected value of the picker.
 
 ![application](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/01-Application.png)
 
-- If you tap the "LOGGING TEST" button, the application write information to the csv log file.
-- If you tap the "THROWS ERROR" button, the application write error information to the csv log file.
+- If you tap the "LOGGING TEST" button, the application writes information to the csv log file.
+- If you tap the "THROWS ERROR" button, the application writes error information to the csv log file.
+- You can change the log level by selecting the item of the picker control.
 
 ## Visual Studio solution structure
 
@@ -91,6 +92,21 @@ namespace Plugin.NLogSample.Logging
 {
     internal class LoggingService : ILoggingService
     {
+        private LogFactory logFactory;
+        private LogFactory LogFactory
+        {
+            get
+            {
+                if(logFactory == null)
+                {
+                    var configName = PlatformLoggingService.ConfigFilePath;
+                    logFactory = new LogFactory(new XmlLoggingConfiguration(configName));
+
+                }
+                return logFactory;
+            }
+        }
+
         private ILogger _logger;
         private ILogger Logger
         {
@@ -98,9 +114,7 @@ namespace Plugin.NLogSample.Logging
             {
                 if (_logger == null)
                 {
-                    var configName = PlatformLoggingService.ConfigFilePath;
-                    LogManager.Configuration = new XmlLoggingConfiguration(configName);
-                    _logger = LogManager.GetLogger("NLogSample");
+                    _logger = logFactory.GetLogger("NLogSample");
                 }
                 return _logger;
             }
@@ -125,20 +139,34 @@ It is said that NLog supports automatically loading NLog.config file in assets f
 ```csharp
 internal class LoggingService : ILoggingService
 {
-    private ILogger _logger;
-    private ILogger Logger
-    {
-        get
+        private LogFactory logFactory;
+        private LogFactory LogFactory
         {
-            if (_logger == null)
+            get
             {
-                var configName = PlatformLoggingService.ConfigFilePath;
-                LogManager.Configuration = new XmlLoggingConfiguration(configName);
-                _logger = LogManager.GetLogger("NLogSample");
+                if(logFactory == null)
+                {
+                     // load the configuration file explicitly
+                    var configName = PlatformLoggingService.ConfigFilePath;
+                    logFactory = new LogFactory(new XmlLoggingConfiguration(configName));
+
+                }
+                return logFactory;
             }
-            return _logger;
         }
-    }
+
+        private ILogger _logger;
+        private ILogger Logger
+        {
+            get
+            {
+                if (_logger == null)
+                {
+                    _logger = logFactory.GetLogger("NLogSample");
+                }
+                return _logger;
+            }
+        }
     // ...
 }
 ```
@@ -197,3 +225,35 @@ public partial class Main : ContentPage
 In the NLogSample.Logging project, ```CrossLoggingService.Current``` property creates the instance of ```LoggingService``` class, where logging codes are implemented. Here is a screenshot that shows the contents of the CSV log file.
 
 ![logfile](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/06-LoggingReuslts.png)
+
+## Changing log level
+
+You can change log level by calling ```DisableLoggingForLevels``` or ```EnableLoggingForLevels``` methods of ```LoggingRule``` class. ```LoggingService.ChangeLogLevel``` method change disable logs, where the log levels are under the value of the argument and enable logs, where the log levels are over the argument.
+
+```csharp
+public void ChangeLogLevel(LogLevel level)
+{
+    
+    if (level == LogLevel.Off)
+    {
+        LogFactory.SuspendLogging();
+    }
+    else
+    {
+        if (!LogFactory.IsLoggingEnabled())
+        {
+            LogFactory.ResumeLogging();
+        }
+
+        int maxLogLevelOrdinal = LogLevel.AllLoggingLevels.Max(p => p.Ordinal);
+        int minLogLevelOrdinal = LogLevel.AllLoggingLevels.Min(p => p.Ordinal);
+
+        foreach (var rule in LogFactory.Configuration.LoggingRules)
+        {
+            rule.DisableLoggingForLevels(LogLevel.FromOrdinal(minLogLevelOrdinal), level);
+            rule.EnableLoggingForLevels(level, LogLevel.FromOrdinal(maxLogLevelOrdinal));
+        }
+    }
+    LogFactory.ReconfigExistingLoggers();
+}
+```
