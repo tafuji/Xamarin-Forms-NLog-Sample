@@ -6,7 +6,7 @@ This is a simple Xamarin.Forms sample code for logging with [NLog](https://nlog-
 
 This repository provides a very simple application, which has a picker and two buttons. If you tap the buttons, sample applicaiton writes information to CSV format log file according to the selected value of the picker.
 
-![application](https://gist.githubusercontent.com/tafuji/8f74b0645375bf82a4452656930e5a6c/raw/21352c4fc3a34e4a7c3600c392fe674dfede43d0/01-Application.png)
+![application](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/01-Application.png)
 
 - If you tap the "LOGGING TEST" button, the application writes information to the csv log file.
 - If you tap the "THROWS ERROR" button, the application writes error information to the csv log file.
@@ -31,13 +31,13 @@ You have to copy the NLog.config file to correct location. The location and sett
 
 In Android platform, NLog.config file shoule be copied in the Assets folder.
 
-![AndoridLocation](https://gist.githubusercontent.com/tafuji/8f74b0645375bf82a4452656930e5a6c/raw/21352c4fc3a34e4a7c3600c392fe674dfede43d0/02-Android-NLogConfig.png)
+![AndoridLocation](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/02-Android-NLogConfig.png)
 
 Then, you have to set the build action value of the property to ```AndroidAsset```.
 
-![AndroidProperty](https://gist.githubusercontent.com/tafuji/8f74b0645375bf82a4452656930e5a6c/raw/21352c4fc3a34e4a7c3600c392fe674dfede43d0/03-Android-NLogConfig-Property.png)
+![AndroidProperty](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/03-Android-NLogConfig-Property.png)
 
-In Android platform, the ```fileName``` attribute should have the value, which shoule be "```/data/data/[your package name]/```" format.
+In Android platform, the ```fileName``` attribute should have the value, which should be "```/data/data/[your package name]/```" format.
 
 ```xml
 <target name="logfile"
@@ -59,11 +59,11 @@ In Android platform, the ```fileName``` attribute should have the value, which s
 
 In iOS platform, you have to copy the NLog.config file in the root of the project.
 
-![iOSLocation](https://gist.githubusercontent.com/tafuji/8f74b0645375bf82a4452656930e5a6c/raw/21352c4fc3a34e4a7c3600c392fe674dfede43d0/04-iOS-NLogConfig.png)
+![iOSLocation](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/04-iOS-NLogConfig.png)
 
 The build action value of the property should be set to ```BundleResource```.
 
-![iOSProperty](https://gist.githubusercontent.com/tafuji/8f74b0645375bf82a4452656930e5a6c/raw/21352c4fc3a34e4a7c3600c392fe674dfede43d0/05-iOS-NLogConfig-Property.png)
+![iOSProperty](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/05-iOS-NLogConfig-Property.png)
 
 In iOS platform, the path of data used in your application shoule be located in the ```Library`` folder of your applicaiton. By using the configuration syntax of system special folder, you can set the value of log file path. Here is the example used in the sample codes.
 
@@ -224,7 +224,7 @@ public partial class Main : ContentPage
 
 In the NLogSample.Logging project, ```CrossLoggingService.Current``` property creates the instance of ```LoggingService``` class, where logging codes are implemented. Here is a screenshot that shows the contents of the CSV log file.
 
-![logfile](https://gist.githubusercontent.com/tafuji/8f74b0645375bf82a4452656930e5a6c/raw/21352c4fc3a34e4a7c3600c392fe674dfede43d0/06-LoggingReuslts.png)
+![logfile](https://raw.githubusercontent.com/tafuji/Xamarin-Forms-NLog-Sample/master/Screenshots/06-LoggingReuslts.png)
 
 ## Changing log level
 
